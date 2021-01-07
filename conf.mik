@@ -1,0 +1,17 @@
+{
+"Script1":{
+    "dhcp_client":{
+        "dhcp_client_add":"/ip dhcp-client add interface=ether disabled=no;",
+        "dhcp_client_del":"/ip dhcp-client remove [find status=searching...];"
+            
+        },
+    "delay":"10",
+    "firewall_nat":{
+        "internet_mark":"/ip dhcp-client set [find status=bound] comment=Internet;",
+        "firewall_add":"/ip firewall nat add chain=srcnat out-interface=[/ip dhcp-client get value-name=interface [find comment =Internet]] action=masquerade comment=Internet;"
+        },
+    "dns":{
+        "dns_add_dhcp":"/ip dns set allow-remote-request=yes;"
+        }
+    }
+}
