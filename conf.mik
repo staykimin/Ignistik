@@ -1,0 +1,49 @@
+{
+"New_Versi":"1.2",
+"Support_Versi":["1.1","1.2","1.3","1.4","1.5"],
+"Config_Versi":[
+	{"1.1":{"Source":{
+			"Script1":{
+					"dhcp_client":{
+						"dhcp_client_add":"/ip dhcp-client add interface=ether disabled=no;",
+						"dhcp_client_del":"/ip dhcp-client remove [find status=searching...];"
+					},
+					"delay":"delay 10;",
+					"firewall_nat":{
+						"internet_mark":"/ip dhcp-client set [find status=bound] comment=Internet;",
+						"firewall_add":"/ip firewall nat add chain=srcnat out-interface=[/ip dhcp-client get value-name=interface [find comment =Internet]] action=masquerade comment=Internet;"
+					},
+					"dns":{
+						"dns_add_dhcp":"/ip dns set allow-remote-request=yes;"
+					}
+				}
+			}
+		}
+	},
+	{"1.2":{"Source":{
+			"Script1":{
+					"dhcp_client":{
+						"dhcp_client_add":"/ip dhcp-client add interface=ether disabled=no;",
+						"dhcp_client_del":"/ip dhcp-client remove [find status=searching...];"
+					},
+					"delay":"delay 5;",
+					"firewall_nat":{
+						"internet_mark":"/ip dhcp-client set [find status=bound] comment=Internet;",
+						"firewall_add":"/ip firewall nat add chain=srcnat out-interface=[/ip dhcp-client get value-name=interface [find comment =Internet]] action=masquerade comment=Internet;"
+					},
+					"dns":{
+						"dns_add_dhcp":"/ip dns set allow-remote-request=yes",
+						"dns_add_statik":"/ip dns set allow-remote-request=yes server=8.8.8.8;"
+					}
+				}
+			}
+		}
+	},
+	{"1.3":"Script3"
+	},
+	{"1.4":"Script4"
+	},
+	{"1.5":"Script5"
+	}
+	]
+}
